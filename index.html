@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Evaluating Real-World Robot Manipulation Policies
+    in Simulation</title>
+  <meta name="description" content="SEEA-R1: Tree-Structured Reinforcement Fine-Tuning for Self-Evolving Embodied Agents">
+  <meta name="keywords" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:title"
+    content="SEEA-R1: Tree-Structured Reinforcement Fine-Tuning for Self-Evolving Embodied Agents">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="SEEA-R1: Tree-Structured Reinforcement Fine-Tuning for Self-Evolving Embodied Agents">
+  <meta property="og:image" content="" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1939" />
+  <meta property="og:image:height" content="772" />
+  <meta property="og:url" content="" />
+  <meta property="og:description" content="Project page for Evaluating Real-World Robot Manipulation Policies
+in Simulation" />
+  <meta name="twitter:title" content="Evaluating Real-World Robot Manipulation Policies
+in Simulation" />
+  <meta name="twitter:description" content="Project page for Evaluating Real-World Robot Manipulation Policies
+in Simulation" />
+  <meta name="twitter:image" content="" />
+
+
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/icon.png">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+
+<body>
+ 
+
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">SEEA-R1: Tree-Structured Reinforcement Fine-Tuning
+              for Self-Evolving Embodied Agents</h1>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+
+
+        <img src="static/images/teaser.png" style="width: 80%; height: auto; display: block; margin: 0 auto;" />
+
+        <h2 class="subtitle has-text-centered">
+          SEEA-R1 self-evolves by reasoning over its environment with perception-grounded planning.
+          The agent explores task solutions using tree-based search guided by a reward model, iteratively refining
+          actions to achieve complex goals.
+          Given a high-level instruction, it explores, plans, and executes actions in an embodied environment.
+        </h2>
+      </div>
+    </div>
+  </section>
+
+
+
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              Self-evolution, the ability of agents to autonomously improve their reasoning and behavior, is essential
+              for the embodied domain with long-horizon, real-world tasks.
+              Despite current advancements in reinforcement fine-tuning (RFT) showing strong performance in enhancing
+              reasoning in LLMs, its potential to enable self-evolving embodied intelligence with multi-modal
+              interactions remains largely unexplored.
+              Specifically, reinforcement fine-tuning faces two fundamental obstacles in embodied settings:
+              (i) the lack of accessible intermediate rewards in multi-step reasoning tasks limits effective learning
+              signals, and
+              (ii) reliance on hand-crafted reward functions restricts generalization to novel tasks and environments.
+              To address these challenges, we present Self-Evolving Embodied Agents-R1, SEEA-R1, the first RFT framework
+              designed for enabling the self-evolving capabilities of embodied agents.
+              Specifically, to convert sparse delayed rewards into denser intermediate signals that improve multi-step
+              reasoning, we propose Tree-based group relative policy optimization (Tree-GRPO) integrates Monte Carlo
+              Tree Search into GRPO.
+              To generalize reward estimation across tasks and scenes, supporting autonomous adaptation and
+              reward-driven self-evolution, we further introduce Multi-modal Generative Reward Model (MGRM).
+              To holistically evaluate the effectiveness of SEEA-R1, we evaluate on the ALFWorld benchmark, surpassing
+              state-of-the-art methods with scores of 85.07% (textual) and 36.19% (multi-modal), outperforming prior
+              models including GPT-4o.
+              SEEA-R1 also achieves scores of 80.3% without environmental reward, surpassing all open-source baselines
+              and highlighting its scalability as a self-evolving embodied agent. Additional experiments and qualitative
+              analysis further support the potential of SEEA-R1 for future research in scalable embodied intelligence.
+            </p>
+          </div>
+        </div>
+      </div>
+      <!--/ Abstract. -->
+
+      <!-- Paper video. -->
+      <!-- <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Video</h2>
+          <div class="publication-video">
+            <video autoplay controls muted loop playsinline width="100%">
+              <source src="static/images/simpler.mp4" type="video/mp4">
+            </video>
+          </div>
+        </div>
+      </div> -->
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">Framework</h2>
+          <div class="content has-text-justified has-text-centered">
+            <img src="static/images/framework.png" style="width: 80%; height: auto; display: block; margin: 0 auto;" />
+            <p>
+              The framework drives continuous improvement through an iterative loop of two core cycles as follows:
+              1. Data Evolution: The Policy Model interacts with the environment via MCTS from an initial state to
+              generate the experience dataset, containing trajectories with derived Q-values, ground truth rewards from
+              the environment, and rewards from the current Reward Model.
+              2. Model Evolution: The collected data is used to update both models:
+              (a) The Policy Model to predict actions and
+              (b) The Reward Model to predict categorical outcomes.
+              Refined models from Model Evolution then drive the next Data Evolution iteration, enabling continuous
+              self-evolution.
+            </p>
+            <h3 class="title is-4">Monte Carlo Tree Search (MCTS) in SEEA-R1</h3>
+            <img src="static/images/trees.png"
+              style="width: 80%; height: auto; display: block; margin: 0 auto;" />
+             
+              <ol>
+                <li><strong>Selection:</strong> Traverse tree via UCT until reaching a leaf.</li>
+                <li><strong>Expansion:</strong> Execute action, observe result, and expand with new actions.</li>
+                <li><strong>Simulation:</strong> Roll out from new node to termination or depth limit, collecting reward <code>r</code>.</li>
+                <li><strong>Backup:</strong> Propagate rewards to update action values <code>Q</code>.</li>
+              </ol>
+            <h3 class="title is-4">Comparison of MLLM methods on unseen tasks</h3>
+            <img src="static/images/unseen_task.png" 
+            style="width: 80%; height: auto; display: block; margin: 0 auto;" />
+            <p>
+              MMBench is a multimodal benchmark that subdivides reasoning and perception capabilities into six Level-2 dimensions: Logic Reasoning (LR), Attribute Reasoning (AR), Relation Reasoning (RR) for Reasoning, and Fine-Grained Perception-Single Instance (FP-S), Fine-Grained Perception-Cross Instance (FP-C), and Coarse Perception (CP) for Perception.
+            </p>
+            
+            <h3 class="title is-4">Ablation Study: Self-Evolution with MGRM</h3>
+            <img src="static/images/ablation.png" 
+            style="width: 80%; height: auto; display: block; margin: 0 auto;" />
+            <p>
+              Performance comparison of SEEA-R1 using different optimization algorithms on ALFWorld over training iterations.
+            </p>
+  
+          </div>
+        </div>
+      </div>
+
+      <section class="section">
+        <div class="container is-max-desktop">
+
+          <div class="columns is-centered">
+
+
+     
+            <div class="columns is-centered">
+              <div class="column is-full-width">
+               
+
+                <br>
+                <h3 class="title is-4">EmbodiedEval Gallery: </h2>
+                  <div class="content has-text-justified">
+                    <p>
+                      To evaluate the generalization ability of our embodied agents beyond the training environment, we introduce EmbodiedEval as an out-of-distribution benchmark. EmbodiedEval tests MLLMs as embodied agents across diverse tasks—including Attribute Question Answering (AttrQA), Spatial Question Answering (SpatialQA), Navigation, Object Interaction, and Social Interaction—within 125 realistic 3D scenes. It provides  a comprehensive assessment of agent capabilities in previously unseen scenarios. This setup enables us to measure generalization under significant domain shifts compared to the ALFWorld environment. We analyze the impact of different control strategies on performance, using key metrics such as overall accuracy, which reflects the percentage of fully completed tasks.
+                    </p>
+                  </div>
+                  <h4 class="title is-6">AttributeQA</h4>
+                  <div class="attribute-container">
+                    <div class="video-block">
+                      <video autoplay controls muted loop playsinline height="100%">
+                        <source src="static/videos/paired_videos/attribute_qa/traj0022.mp4" type="video/mp4">
+                      </video>
+                      <p class="left-align">Task:Identify an object that is 
+                        taller than 1 m.</p>
+                        <p class="left-align">Result:<span style="color: green;">Succeed</span></p>
+                    </div>
+                    <div class="video-block">
+                      <video autoplay controls muted loop playsinline height="100%">
+                        <source src="static/videos/paired_videos/attribute_qa/traj0128.mp4"
+                          type="video/mp4">
+                      </video>
+                      <p class="left-align">Task:How many antiques are there on the glass table in the living room? Be careful not to mistake food for antiques.</p>
+                      <p class="left-align">Result:<span style="color: green;">Succeed</span></p>
+                    </div>
+                    <div class="video-block">
+                      <video autoplay controls muted loop playsinline height="100%">
+                        <source src="static/videos/paired_videos/attribute_qa/traj0065.mp4" type="video/mp4">
+                      </video>
+                      <p class="left-align">Task:Are there more flower pots in the living room or the bedroom?</p>
+                      <p class="left-align">Result:<span style="color: red;">Failed</span></p>
+                    </div>
+                  </div>
+
+                  <h4 class="title is-6">Navigation</h4>
+                  <div class="attribute-container">
+                    <div class="video-block">
+                      <video autoplay controls muted loop playsinline height="100%">
+                        <source src="static/videos/paired_videos/navigation/traj0148.mp4" type="video/mp4">
+                      </video>
+                      <p class="left-align">Task:Position yourself in front of the instrument that can be used for playing music.</p>
+                      <p class="left-align">Result:<span style="color: green;">Succeed</span></p>
+                    </div>
+                    <div class="video-block">
+                      <video autoplay controls muted loop playsinline height="100%">
+                        <source src="static/videos/paired_videos/navigation/traj0263.mp4"
+                          type="video/mp4">
+                      </video>
+                      <p class="left-align">Task:Walk through the kitchen, enter the bedroom, and draw near to the switch handle next to the orange floor lamp.</p>
+                      <p class="left-align">Result:<span style="color: green;">Succeed</span></p>
+                    </div>
+                    <div class="video-block">
+                      <video autoplay controls muted loop playsinline height="100%">
+                        <source src="static/videos/paired_videos//navigation/traj0020.mp4" type="video/mp4">
+                      </video>
+                      <p class="left-align">Task:Walk towards the tallest tree in the yard.</p>
+                      <p class="left-align">Result:<span style="color: red;">Failed</span></p>
+                    </div>
+                  </div>
+
+                  <h4 class="title is-6">Object Interaction</h4>
+                  <div class="attribute-container">
+                    <div class="video-block">
+                      <video autoplay controls muted loop playsinline height="100%">
+                        <source src="static/videos/paired_videos/object_interaction/traj0196.mp4" type="video/mp4">
+                      </video>
+                      <p class="left-align">Task:Pick up the red notebook on the side table in the living room.</p>
+                      <p class="left-align">Result:<span style="color: green;">Succeed</span></p>
+                    </div>
+                    <div class="video-block">
+                      <video autoplay controls muted loop playsinline height="100%">
+                        <source src="static/videos/paired_videos/object_interaction/traj0237.mp4" type="video/mp4">
+                      </video>
+                      <p class="left-align">Task:Turn on the TV.</p>
+                      <p class="left-align">Result:<span style="color: green;">Succeed</span></p>
+                  
+                    </div>
+                    <div class="video-block">
+                      <video autoplay controls muted loop playsinline height="100%">
+                        <source src="static/videos/paired_videos/object_interaction/traj0013.mp4" type="video/mp4">
+                      </video>
+                      <p class="left-align">Task:Is there an egg inside the fridge?</p>
+                      <p class="left-align">Result:<span style="color: red;">Failed</span></p>
+                    </div>
+              
+                  </div>
+
+
+                  <h4 class="title is-6"> SpatialQA</h4>
+                  <div class="attribute-container">
+                    <div class="video-block">
+                      <video autoplay controls muted loop playsinline height="100%">
+                        <source src="static/videos/paired_videos/spatial_qa/traj0024.mp4" type="video/mp4">
+                      </video>
+                      <p class="left-align">Task:Which has a larger area: the carpet in the bedroom or the rug in the bathroom?.</p>
+                      <p class="left-align">Result:<span style="color: green;">Succeed</span></p>
+                    </div>
+                    <div class="video-block">
+                      <video autoplay controls muted loop playsinline height="100%">
+                        <source src="static/videos/paired_videos/spatial_qa/traj0074.mp4" type="video/mp4">
+                      </video>
+                      <p class="left-align">Task:Are all the chairs around the round table in the kitchen the same height?.</p>
+                      <p class="left-align">Result:<span style="color: green;">Succeed</span></p>
+                    </div>
+                    <div class="video-block">
+                      <video autoplay controls muted loop playsinline height="100%">
+                        <source src="static/videos/paired_videos/spatial_qa/traj0131.mp4" type="video/mp4">
+                      </video>
+                      <p class="left-align">Task:Compare the size of the television in the living room to the mirror in the bedroom.</p>
+                      <p class="left-align">Result:<span style="color: red;">Failed</span></p>
+                    </div>
+           
+                  </div>
+              </div>
+            </div>
+          </div>
+      </section>
+
+
+
+
+
+</body>
+
+</html>
